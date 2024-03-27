@@ -1,7 +1,24 @@
 <?php
 include 'template/header.php';
 include 'template/sidebar.php';
+
+$servername = "localhost";
+$database = "db_mahasiswa";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+$query = "SELECT * FROM prodi";
+$hasil = mysqli_query($conn, $query);
+
+$data = [];
+while ($baris = mysqli_fetch_assoc($hasil)) {
+    $data[] = $baris;
+};
+
 ?>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -31,12 +48,11 @@ include 'template/sidebar.php';
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Responsive Hover Table</h3>
+                            <h3 class="card-title">Data Prodi</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right"
-                                        placeholder="Search">
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
@@ -51,42 +67,27 @@ include 'template/sidebar.php';
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
+                                        <th>No</th>
+                                        <th>Nama Prodi</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-danger">Denied</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
+                                    <?php
+                                    $i = 1;
+                                    foreach ($data as $d) {
+                                    ?>
+
+                                        <tr>
+                                            <td><?= $i++ ?></td>
+                                            <td><?= $d['Nama_Prodi'] ?></td>
+                                            <td> <a href="" class="btn btn-warning">Edit</a>
+                                                <a href="" class="btn btn-danger">Hapus</a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
