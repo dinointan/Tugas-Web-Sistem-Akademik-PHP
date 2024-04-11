@@ -1,13 +1,9 @@
 <?php
+include 'koneksi.php';
 include 'template/header.php';
 include 'template/sidebar.php';
 
-$servername = "localhost";
-$database = "db_mahasiswa";
-$username = "root";
-$password = "";
-
-$conn = mysqli_connect($servername, $username, $password, $database);
+require 'koneksi.php';
 
 $query = "SELECT * FROM prodi";
 $hasil = mysqli_query($conn, $query);
@@ -51,15 +47,7 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                             <h3 class="card-title">Data Prodi</h3>
 
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                <a href="tambahprodi.php" class="btn btn-primary">Tambah</a>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -77,12 +65,11 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                                     $i = 1;
                                     foreach ($data as $d) {
                                     ?>
-
                                         <tr>
                                             <td><?= $i++ ?></td>
                                             <td><?= $d['Nama_Prodi'] ?></td>
-                                            <td> <a href="" class="btn btn-warning">Edit</a>
-                                                <a href="" class="btn btn-danger">Hapus</a>
+                                            <td> <a href="editprodi.php?id_prodi=<?= $d['ID_Prodi'] ?>" class="btn btn-warning">Edit</a>
+                                                <a href="hapusprodi.php?id_prodi=<?= $d['ID_Prodi'] ?>" class="btn btn-danger">Hapus</a>
                                             </td>
                                         </tr>
                                     <?php

@@ -2,12 +2,7 @@
 include 'template/header.php';
 include 'template/sidebar.php';
 
-$servername = "localhost";
-$database = "db_mahasiswa";
-$username = "root";
-$password = "";
-
-$conn = mysqli_connect($servername, $username, $password, $database);
+require 'koneksi.php';
 
 $query = "SELECT * FROM mahasiswa JOIN prodi ON mahasiswa.id_prodi = prodi.id_prodi";
 $hasil = mysqli_query($conn, $query);
@@ -50,15 +45,7 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                             <h3 class="card-title">Data Mahasiswa</h3>
 
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                <a href="tambahmahasiswa.php" class="btn btn-primary">Tambah</a>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -89,8 +76,8 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                                             <td><?php echo $d['Nomor_HP'] ?></td>
                                             <td><?php echo $d['Alamat'] ?></td>
                                             <td><?php echo $d['Foto'] ?></td>
-                                            <td> <a href="" class="btn btn-warning">Edit</a>
-                                                <a href="" class="btn btn-danger">Hapus</a>
+                                            <td> <a href="editmahasiswa.php?nim=<?php echo $d['NIM']?>" class="btn btn-warning">Edit</a>
+                                                <a href="hapusmahasiswa.php?nim=<?php echo $d['NIM']?>" class="btn btn-danger">Hapus</a>
                                             </td>
 
                                         </tr>
