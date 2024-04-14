@@ -58,6 +58,7 @@ while ($baris = mysqli_fetch_assoc($hasilProdi)) {
             <!-- form start -->
             <form action="editaksimahasiswa.php" method="post" enctype="multipart/form-data">
               <input type='hidden' name='nimlama' id='nimlama' value="<?php echo $nim ?>" />
+              <input type='hidden' name='fotolama' id='fotolama' value="<?php echo $data['Foto'] ?>" />
               <div class="card-body">
                 <div class="form-group">
                   <label for="nim">NIM</label>
@@ -75,7 +76,8 @@ while ($baris = mysqli_fetch_assoc($hasilProdi)) {
                     foreach ($dataProdi as $prodi) {
                       ?>
                       <option id="<?php echo $prodi['Nama_Prodi'] ?>" value="<?php echo $prodi['ID_Prodi'] ?>">
-                        <?php echo $prodi['Nama_Prodi'] ?></option>
+                        <?php echo $prodi['Nama_Prodi'] ?>
+                      </option>
                       <?php
                     }
                     ?>
@@ -92,7 +94,7 @@ while ($baris = mysqli_fetch_assoc($hasilProdi)) {
                     value="<?php echo $data['Alamat'] ?>">
                 </div>
                 <div class="form-group">
-                  <label for="foto">Foto</label><br>
+                  <label for="photo">Foto</label><br>
                   <input type="file" id="photo" name="photo" accept="image/*">
                 </div>
               </div>

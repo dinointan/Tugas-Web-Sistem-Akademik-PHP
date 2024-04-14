@@ -67,7 +67,7 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                                     <?php
                                     $i = 1;
                                     foreach ($data as $d) {
-                                    ?>
+                                        ?>
                                         <tr>
                                             <td><?php echo $i++ ?></td>
                                             <td><?php echo $d['NIM'] ?></td>
@@ -75,13 +75,16 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                                             <td><?php echo $d['Nama_Prodi'] ?></td>
                                             <td><?php echo $d['Nomor_HP'] ?></td>
                                             <td><?php echo $d['Alamat'] ?></td>
-                                            <td><?php echo $d['Foto'] ?></td>
-                                            <td> <a href="editmahasiswa.php?nim=<?php echo $d['NIM']?>" class="btn btn-warning">Edit</a>
-                                                <a href="hapusmahasiswa.php?nim=<?php echo $d['NIM']?>" class="btn btn-danger">Hapus</a>
+                                            <td> <img src="dist/img/<?php echo $d['Foto'] ?>" width="100px"
+                                                    height="100px" /> </td>
+                                            <td> <a href="editmahasiswa.php?nim=<?php echo $d['NIM'] ?>"
+                                                    class="btn btn-warning">Edit</a>
+                                                <a href="hapusmahasiswa.php?nim=<?php echo $d['NIM'] ?>"
+                                                    class="btn btn-danger">Hapus</a>
                                             </td>
 
                                         </tr>
-                                    <?php
+                                        <?php
                                     }
                                     ?>
                                 </tbody>
