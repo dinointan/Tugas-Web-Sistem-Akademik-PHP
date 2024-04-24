@@ -1,9 +1,11 @@
 <?php
+session_start();
 include 'koneksi.php';
 include 'template/header.php';
 include 'template/sidebar.php';
 
 require 'koneksi.php';
+ceklogin();
 
 $query = "SELECT * FROM prodi";
 $hasil = mysqli_query($conn, $query);

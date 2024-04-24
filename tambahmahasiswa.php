@@ -1,8 +1,10 @@
 <?php
+session_start();
 include 'template/header.php';
 include 'template/sidebar.php';
 
 require 'koneksi.php';
+ceklogin();
 
 $query = "SELECT * FROM prodi";
 $hasil = mysqli_query($conn, $query);
@@ -13,6 +15,7 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
 }
 
 ?>
+
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -62,21 +65,19 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                 </div>
                 <div class="form-group">
                   <label for="namaprodi">Prodi</label>
-                  <select name="namaprodi" id="namaprodi" class="form-control">
+                  <select name="namaprodi" id="namaprodi" class="form-control select2bs4" style="width: 100%;">
+                    <option value="">Pilih Prodi</option>
                     <?php
-                    foreach ($dataProdi as $data) {
-                      ?>
-                      <option id="<?php echo $data['Nama_Prodi'] ?>" value="<?php echo $data['ID_Prodi'] ?>">
-                        <?php echo $data['Nama_Prodi'] ?>
-                      </option>
+                    foreach ($dataProdi as $data): ?>
+                      <option value="<?php echo $data['ID_Prodi'] ?>"><?php echo $data['Nama_Prodi']; ?></option>
                       <?php
-                    }
+                    endforeach;
                     ?>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class=" form-group">
                   <label for="nomorhp">Nomor HP</label>
-                  <input type="text" name="nomorhp" class="form-control" id="nomorhp" placeholder="Masukkan Nomor HP">
+                  <input type="text" name="nomorhp" class="form-control" id="nomorhp" place holder="Masukkan Nomor HP">
                 </div>
                 <div class="form-group">
                   <label for="alamat">Alamat</label>
@@ -84,14 +85,20 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                 </div>
                 <div class="form-group">
                   <label for="photo">Foto</label><br>
-                  <input type="file" name="photo" id="photo" accept="image/*">
-                </div>
-              </div>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="photo" name="photo">
+                      <label class="custom-file-label" for="photo">Pilih Foto</label>
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text">Upload</span>
+                    </div>
+                  </div>
 
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
             </form>
           </div>
           <!-- /.card -->
@@ -114,11 +121,6 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
 
   </section>
   <!-- right col -->
-</div>
-<!-- /.row (main row) -->
-</div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
 </div>
 <?php
 include 'template/footer.php';

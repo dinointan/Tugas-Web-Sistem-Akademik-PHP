@@ -10,6 +10,7 @@ $hasil = mysqli_query($conn, $query);
 
 $data = mysqli_fetch_assoc($hasil);
 
+
 $queryProdi = "SELECT * FROM prodi";
 $hasilProdi = mysqli_query($conn, $queryProdi);
 
@@ -62,7 +63,8 @@ while ($baris = mysqli_fetch_assoc($hasilProdi)) {
               <div class="card-body">
                 <div class="form-group">
                   <label for="nim">NIM</label>
-                  <input type="text" name="nim" class="form-control" id="nim" value="<?php echo $data['NIM'] ?>">
+                  <input type="text" name="nim" class="form-control" id="nim" value="<?php echo $data['NIM'] ?>"
+                    readonly>
                 </div>
                 <div class="form-group">
                   <label for="namamahasiswa">Nama Mahasiswa</label>
@@ -75,12 +77,14 @@ while ($baris = mysqli_fetch_assoc($hasilProdi)) {
                     <?php
                     foreach ($dataProdi as $prodi) {
                       ?>
-                      <option id="<?php echo $prodi['Nama_Prodi'] ?>" value="<?php echo $prodi['ID_Prodi'] ?>">
+                      <option id="<?php echo $prodi['ID_Prodi']; ?>" value="<?php echo $prodi['ID_Prodi']; ?>"
+                        <?= ($prodi['ID_Prodi'] == $data['ID_Prodi']) ? "SELECTED" : "" ?>   <?= $prodi['Nama_Prodi'] ?>>
                         <?php echo $prodi['Nama_Prodi'] ?>
                       </option>
                       <?php
                     }
                     ?>
+
                   </select>
                 </div>
                 <div class="form-group">
@@ -95,7 +99,10 @@ while ($baris = mysqli_fetch_assoc($hasilProdi)) {
                 </div>
                 <div class="form-group">
                   <label for="photo">Foto</label><br>
-                  <input type="file" id="photo" name="photo" accept="image/*">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="photo" name="photo">
+                    <label class="custom-file-label" for="photo"><?php echo $data['Foto'] ?></label>
+                  </div>
                 </div>
               </div>
 

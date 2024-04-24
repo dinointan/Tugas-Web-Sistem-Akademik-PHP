@@ -1,8 +1,11 @@
 <?php
+session_start();
+
 include 'template/header.php';
 include 'template/sidebar.php';
 
 require 'koneksi.php';
+ceklogin();
 
 $query = "SELECT * FROM mahasiswa JOIN prodi ON mahasiswa.id_prodi = prodi.id_prodi";
 $hasil = mysqli_query($conn, $query);
@@ -75,8 +78,8 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                                             <td><?php echo $d['Nama_Prodi'] ?></td>
                                             <td><?php echo $d['Nomor_HP'] ?></td>
                                             <td><?php echo $d['Alamat'] ?></td>
-                                            <td> <img src="dist/img/<?php echo $d['Foto'] ?>" width="100px"
-                                                    height="100px" /> </td>
+                                            <td> <img style="object-fit: cover;" src="dist/img/<?php echo $d['Foto'] ?>"
+                                                    width="100px" height="100px" /> </td>
                                             <td> <a href="editmahasiswa.php?nim=<?php echo $d['NIM'] ?>"
                                                     class="btn btn-warning">Edit</a>
                                                 <a href="hapusmahasiswa.php?nim=<?php echo $d['NIM'] ?>"
