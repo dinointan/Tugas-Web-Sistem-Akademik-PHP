@@ -1,5 +1,8 @@
 <?php
+session_start();
 require 'koneksi.php';
+ceklogin();
+cekadmin();
 
 $nim = $_GET['nim'];
 $query = "DELETE FROM mahasiswa WHERE NIM='$nim'";
@@ -13,15 +16,15 @@ if (mysqli_affected_rows($conn) > 0) {
             document.location.href='mahasiswa.php';
             </script>
     ";
-}else {
+} else {
     echo "
     <script>
     alert ('Data gagal dihapus');
     </script>
 
 ";
-echo mysqli_error($conn);
-};
+    echo mysqli_error($conn);
+}
+;
 
 ?>
-

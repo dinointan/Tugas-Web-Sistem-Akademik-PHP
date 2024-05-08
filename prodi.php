@@ -1,11 +1,12 @@
 <?php
 session_start();
-include 'koneksi.php';
-include 'template/header.php';
-include 'template/sidebar.php';
 
 require 'koneksi.php';
 ceklogin();
+cekadmin();
+
+include 'template/header.php';
+include 'template/sidebar.php';
 
 $query = "SELECT * FROM prodi";
 $hasil = mysqli_query($conn, $query);
@@ -13,7 +14,8 @@ $hasil = mysqli_query($conn, $query);
 $data = [];
 while ($baris = mysqli_fetch_assoc($hasil)) {
     $data[] = $baris;
-};
+}
+;
 
 ?>
 
@@ -49,7 +51,9 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                             <h3 class="card-title">Data Prodi</h3>
 
                             <div class="card-tools">
-                                <a href="tambahprodi.php" class="btn btn-primary">Tambah</a>
+                                <?php if ($_SESSION['hakakses'] == 'admin') { ?>
+                                    <a href="tambahprodi.php" class="btn btn-primary">Tambah</a>
+                                <?php } ?>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -66,15 +70,20 @@ while ($baris = mysqli_fetch_assoc($hasil)) {
                                     <?php
                                     $i = 1;
                                     foreach ($data as $d) {
-                                    ?>
+                                        ?>
                                         <tr>
                                             <td><?= $i++ ?></td>
                                             <td><?= $d['Nama_Prodi'] ?></td>
-                                            <td> <a href="editprodi.php?id_prodi=<?= $d['ID_Prodi'] ?>" class="btn btn-warning">Edit</a>
-                                                <a href="hapusprodi.php?id_prodi=<?= $d['ID_Prodi'] ?>" class="btn btn-danger">Hapus</a>
+                                            <td>
+                                                <?php if ($_SESSION['hakakses'] == 'admin') { ?>
+                                                    <a href="editprodi.php?id_prodi=<?= $d['ID_Prodi'] ?>"
+                                                        class="btn btn-warning">Edit</a>
+                                                    <a href="hapusprodi.php?id_prodi=<?= $d['ID_Prodi'] ?>"
+                                                        class="btn btn-danger">Hapus</a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
-                                    <?php
+                                        <?php
                                     }
                                     ?>
                                 </tbody>

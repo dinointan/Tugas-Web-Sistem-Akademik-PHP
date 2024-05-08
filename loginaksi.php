@@ -15,6 +15,7 @@ if (password_verify($password, $row['Password'])) {
     $_SESSION['login'] = true;
     $_SESSION['nama'] = $row['Nama'];
     $_SESSION['foto'] = $row['Foto'];
+    $_SESSION['hakakses'] = 'mahasiswa';
     header("Location: index.php");
 } else {
     echo "
